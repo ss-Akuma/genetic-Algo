@@ -110,27 +110,30 @@ void mutation(int(&numbers)[init_population][5]){
 
 int main() {
 
+    //setting the target
     int target[4];
-    cout << "enter a 4-digit number: ";  
+    cout << "enter a 4-digit number: ";                          
     for(int i=0 ; i<4 ; i++){
         cin >> target[i];
     }
 
+    //creating our initial population
     int numbers[init_population][5];
-
-    for(int i=0;i<init_population;i++) {
+    for(int i=0;i<init_population;i++) {         
         for(int j=0;j<4;j++) {
             numbers[i][j] = randomnum();
         }
     }
-
     int generation = 0;
+
     
     for(int rpt=0 ; rpt < repeat ; rpt++) {
 
+        //evaluating and sorting the result
         evaluate(numbers, target);
         sort(numbers);
-     
+
+        //checking for the target
         if(numbers[0][4] == 4) {
             cout << "target was found in generation " << generation;
             break;
@@ -141,6 +144,8 @@ int main() {
                 cout << numbers[0][i];
             }
             cout << endl;
+
+            //creating the next generation
             cross_over(numbers);
             mutation(numbers);
             generation++;
